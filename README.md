@@ -1,6 +1,6 @@
 # rest-server-passport
-REST API ,passport to authentiacate
-
+*Use JSON web tokens for token-based user authentication*
+*Use Passport module together with passport-local and passport-local-mongoose for setting up local authentication within your server.*
 
 ##jsonwebtoken 函数：
 //验证函数，token: 登录成功后的token,secretOrPublicKey:自己设的加密key字符串，最后一个是回调函数
@@ -20,4 +20,7 @@ REST API ,passport to authentiacate
 ##passport 函数
 1.本地认证
   `passport.authenticate('local', function(err, user, info){})`
-  
+  passport.authenticate(‘local’)就是中间件，若通过就进入后面的回调函数，并且给res加上res.user，若不通过则默认返回401错误
+##HTTP request操作
+logIn(user, options, callback)：用login()也可以。作用是为登录用户初始化session。options可设置session为false，即不初始化session，默认为true。
+logOut()：别名为logout()。作用是登出用户，删除该用户session。不带参数。
