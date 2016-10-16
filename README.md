@@ -1,4 +1,14 @@
 # rest-server-passport
+主要创建文件：
+app.js
+DishRouter.js
+dishes.js
+verify.js//验证登录
+users.js//路由处理： login,register, logout
+user.js//user 架构
+config.js //配置连接mongodburl， secretKey
+
+
 *Use JSON web tokens for token-based user authentication*
 *Use Passport module together with passport-local and passport-local-mongoose for setting up local authentication within your server.*
 
@@ -24,3 +34,20 @@
 ##HTTP request操作
 logIn(user, options, callback)：用login()也可以。作用是为登录用户初始化session。options可设置session为false，即不初始化session，默认为true。
 logOut()：别名为logout()。作用是登出用户，删除该用户session。不带参数。
+##passport-local
+`
+// user.js
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var passportLocalMongoose = require('passport-local-mongoose');
+
+//user 架构
+var User = new Schema({});
+
+User.plugin(passportLocalMongoose);
+
+//暴露出接口
+module.exports = mongoose.model('User', User);
+`
+
+资料来源于：[passport.js学习笔记](http://idlelife.org/archives/808)      [Exercise (Instructions): User Authentication with Passport] (https://www.coursera.org/learn/server-side-development/supplement/tuhH9/exercise-instructions-user-authentication-with-passport)
